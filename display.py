@@ -11,6 +11,7 @@ class Display:
             sim (Main Sim Class): Allows for backtracking to get the sim objects
         """
         self.sim = sim
+        #Setting up pygame screen and clock
         pygame.init()
         self.screen = pygame.display.set_mode((0,0),pygame.FULLSCREEN,pygame.DOUBLEBUF | pygame.HWSURFACE)
         self.clock = pygame.time.Clock()
@@ -24,6 +25,7 @@ class Display:
         self.side_display_surface = Screen_surface(self,self.options_area,self.screen_height - self.options_area + (self.screen_height / 20),[self.object_display_surface.get_size()[0],0],(0,0,255),True)
         self.bottom_display_surface = Screen_surface(self,self.screen_width,self.options_area + (self.screen_height / 20),self.object_display_surface.rect.bottomleft,(0,255,0),True)
         
+        #I have made then to be easily customizable with just a line or two of code
         self.object_display_surface.hidden_settings["Fps_counter"] = True
         self.object_display_surface.hidden_settings["Sim_frame_counter"] = True
         
@@ -33,7 +35,6 @@ class Display:
         self.bottom_display_surface.hidden_settings["Use_background_image"] = True
         self.bottom_display_surface.hidden_settings["Image_surface"] = self._create_display_gradient(self.bottom_display_surface.surface.get_width(),self.bottom_display_surface.surface.get_height())
         
-        print(40 / self.side_display_surface.get_size()[1])
         self.side_display_surface.render_objects["Windspeed_text"] = Text(self.side_display_surface.surface,"Windspeed",10,(0,0,0),self.side_display_surface.get_size()[0] / 2,self.side_display_surface.get_size()[1] / 3,self.side_display_surface.get_size()[0] * 0.4583,self.side_display_surface.get_size()[1] * 0.03472)
         
         self.side_display_surface.render_objects["Windspeed_slider"] = TextInput(self,self.side_display_surface.surface,self.side_display_surface.get_size()[0] / 2,self.side_display_surface.get_size()[1] / 2,165,40,(0,0,0),5)
@@ -44,6 +45,8 @@ class Display:
 
 
     def _main_menu_input(self):
+        """The name of the function kind of explains everything (WORK IN PROGRESS)
+        """
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -56,11 +59,13 @@ class Display:
                 pass
     
     def _main_menu_render(self):
+        """Displays main menu items (WORK IN PROGRESS)
+        """
         pygame.display.flip()
         self.clock.tick(60)
     
     def main_menu(self):
-        """Renders and get input for the Main Menu
+        """Renders and gets input for the Main Menu. (WORK IN PROGRESS)
         """
         self._main_menu_input()
         self._main_menu_render()
@@ -68,15 +73,27 @@ class Display:
 
 
     def _main_sim_object_display(self):
+        #Function located in display_features.py in Screen_surface class
         self.object_display_surface.draw_from_list(self.sim.objects)
     
     def _main_sim_side_display(self):
+        #Function located in display_features.py in Screen_surface class
         self.side_display_surface.draw()
     
     def _main_sim_bottom_display(self):
+        #Function located in display_features.py in Screen_surface class
         self.bottom_display_surface.draw()
     
     def _create_display_gradient(self,width,height):
+        """Created background gradients for creating better looking surfaces
+
+        Args:
+            width (int): the width of the desired size of gradient you want
+            height (int): the height of the desired size of gradient you want
+
+        Returns:
+            Pygame.Surface: The desired gradient... in only one style... Sorry future me :(
+        """
         side_display_gradient = pygame.Surface((2,2))
         pygame.draw.line(side_display_gradient, (25,25,25), (0,0), (0,1))
         pygame.draw.line(side_display_gradient, (0,0,0), (1,0), (1,1))
@@ -91,6 +108,8 @@ class Display:
         self.clock.tick(0)
     
     def _main_sim_input(self):
+        """The name of the function kind of explains everything. Grabs the inputs from pygame and allows each surface to have a turn with it when said surface is focused
+        """
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -117,7 +136,7 @@ class Display:
                         self.side_display_surface.check_objects_for_text_input(event.unicode)
     
     def main_sim(self):
-        """Renders and get input for the Sim
+        """Renders and gets input for the Sim
         """
         self._main_sim_input()
         self._main_sim_render()

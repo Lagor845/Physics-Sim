@@ -1,7 +1,7 @@
 import math
 
 class Vector3d:
-    def __init__(self,x = 0,y = 0,z = 0) -> None:
+    def __init__(self,x = 0.0,y = 0.0,z = 0.0) -> None:
         self.x = x
         self.y = y
         self.z = z
@@ -49,3 +49,9 @@ def convert_angles_to_vector3(x_angle = 0,y_angle = 0,z_angle = 0):
     y_angle = math.sin(math.radians(y_angle))
     z_angle = math.cos(math.radians(z_angle))
     return Vector3d(x_angle,y_angle,z_angle)
+
+def correct_to_pygame_screen(pos:Vector3d,screen_size):
+    return Vector3d((pos.x - screen_size[0]/2) * -1,(pos.y - screen_size[1]/2) * -1)
+
+def correct_to_coordinate_system(pos:Vector3d,screen_size):
+    return Vector3d((pos.x + screen_size[0]/2) * -1,(pos.y + screen_size[1]/2) * -1)

@@ -2,6 +2,9 @@ import os
 from importlib import import_module
 from inspect import getmembers,isclass
 
+
+#This is a side project to see if it is possible to make the sim easily customizable for external users
+
 scripts = []
 for file in os.listdir(os.path.dirname(os.path.realpath(__file__)) + "\\scripts"):
     if file.endswith(".py"):

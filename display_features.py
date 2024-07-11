@@ -68,7 +68,13 @@ class Screen_surface:
             else:
                 self.surface.fill(self.color)
         for item in draw_list:
-            item.draw()
+            
+            
+            #Remove this after done with troubleshooting!!!
+            
+            
+            break
+            item.draw(self.surface)
         if self.hidden_settings["Fps_counter"]:
             self._render_fps_counter()
         if self.hidden_settings["Sim_frame_counter"]:
@@ -93,6 +99,8 @@ class Screen_surface:
         self.display.screen.blit(self.surface,self.pos)
         if self.refresh:
             pygame.display.update(self.real_rect)
+
+
 
 class TextInput:
     def __init__(self,display,surface,x,y,width,height,font_color,max_character_count) -> None:
@@ -225,6 +233,8 @@ class TextInput:
             self.surface.blit(text,self.rect)
 
             self.changed = False
+
+
 
 class Text:
     def __init__(self,surface,text,font_size,text_color,x_pos,y_pos,width,height) -> None:
