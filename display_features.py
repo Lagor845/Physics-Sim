@@ -68,12 +68,6 @@ class Screen_surface:
             else:
                 self.surface.fill(self.color)
         for item in draw_list:
-            
-            
-            #Remove this after done with troubleshooting!!!
-            
-            
-            break
             item.draw(self.surface)
         if self.hidden_settings["Fps_counter"]:
             self._render_fps_counter()
