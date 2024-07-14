@@ -40,6 +40,9 @@ class Vector3d:
             return Vector3d(self.x / num,self.y / num,self.z / num)
         return Vector3d(0,0,0)
     
+    def return_values_in_string(self):
+        return f"{self.x},{self.y},{self.z}"
+    
 def normalize_vector(vector3d):
     normalizing_value = ((vector3d.x ** 2) + (vector3d.y ** 2) + (vector3d.z ** 2)) ** 2
     return Vector3d(vector3d.x / normalizing_value,vector3d.y / normalizing_value,vector3d.z / normalizing_value)
